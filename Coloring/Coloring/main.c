@@ -1,5 +1,9 @@
 #include <cstdio>
 #include <stdlib.h>
+enum boolean {
+	false,
+	true,
+};
 
 //creates empty 2-dimentional size x size table
 void createEmpty2DimentionalTable(int **tab, int size)
