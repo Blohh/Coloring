@@ -6,13 +6,6 @@ enum boolean {
 	true,
 };
 
-//creates empty 2-dimentional size x size table
-void createEmpty2DimentionalTable(int **tab, int size)
-{
-	tab = malloc(sizeof(int*)*size);
-	for (int i = 0; i < size; i++)
-		tab[i] = malloc(sizeof(int)*size);
-}
 //fills 2-dimentional size x size table
 void fill2DimentionalTable(int **tab, int size)
 {
@@ -135,7 +128,6 @@ enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int gra
 	enum boolean *visited = malloc(sizeof(enum boolean)*graph_size);
 	createVisitedTable(graph_size, visited);
 	int vertex_of_maximal_degree = foundVertexOfMaximalDegree(graph, graph_size);
-	//if (isGraphEmpty(graph, graph_size, count_of_connections) == true || isGraphFull(graph, graph_size, count_of_connections)) return true;
 	if (subGraphIsFull(graph, graph_size, vertex_of_maximal_degree)) return true;
 	else if (isOddCycle(graph, visited, vertex_of_maximal_degree, graph_size)) return true;
 	return false;
