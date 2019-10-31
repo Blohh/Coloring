@@ -1,4 +1,5 @@
-#include <cstdio>
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 #include <stdlib.h>
 enum boolean {
 	false,
@@ -18,11 +19,20 @@ void fill2DimentionalTable(int **tab, int size)
 	for (int i = 0; i < size; i++)
 		for (int j = 0; j < size; j++)
 			scanf("%d", &tab[i][j]);
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			printf("%d ", tab[i][j]);
+		}
+		printf("\n");
+	}
 }
 //counts connections in graph
 int countConnectionsInGraph(int **graph, int graph_size)
 {
-	int count_of_connections;
+	int count_of_connections = 0;;
 	for (int i = 0; i < graph_size; i++)
 		for (int j = 0; j < graph_size; j++)
 			count_of_connections += graph[i][j];
@@ -115,13 +125,35 @@ enum boolean subGraphIsFull(int **graph, int graph_length, int vertex)
 	}
 	return true;
 }
+void createVisitedTable(int graph_size, enum boolean *visited)
+{
+	for (int i = 0; i < graph_size; i++) visited[i] = false;
+}
+//checks if chromatic number is greater than maximal degree
+enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int graph_size)
+{
+	enum boolean *visited = malloc(sizeof(enum boolean)*graph_size);
+	createVisitedTable(graph_size, visited);
+	int vertex_of_maximal_degree = foundVertexOfMaximalDegree(graph, graph_size);
+	//if (isGraphEmpty(graph, graph_size, count_of_connections) == true || isGraphFull(graph, graph_size, count_of_connections)) return true;
+	if (subGraphIsFull(graph, graph_size, vertex_of_maximal_degree)) return true;
+	else if (isOddCycle(graph, visited, vertex_of_maximal_degree, graph_size)) return true;
+	return false;
+}
 int main()
 {
 	int graph_length = 0,
-		**graph,
-		degree,
-		maximal_degree = 0,
-		vertex = 0,
-		sum = 0;
+		**graph;
+	scanf("%d", &graph_length);
+	graph = malloc(sizeof(int*)*graph_length);
+	for (int i = 0; i < graph_length; i++)
+		graph[i] = malloc(sizeof(int)*graph_length);
+	fill2DimentionalTable(graph, graph_length);
+	enum boolean is_chromatic_number_greater = isChromaticNumberGreaterThanMaximalGraphDegree(graph, graph_length);
+	if (is_chromatic_number_greater == true) printf("True");
+	else printf("False");
+	for (int i = 0; i < graph_length; i++)
+		free(graph[i]);
+	free(graph);
 	return 0;
 }
