@@ -22,29 +22,6 @@ void fill2DimentionalTable(int **tab, int size)
 		printf("\n");
 	}
 }
-//counts connections in graph
-int countConnectionsInGraph(int **graph, int graph_size)
-{
-	int count_of_connections = 0;;
-	for (int i = 0; i < graph_size; i++)
-		for (int j = 0; j < graph_size; j++)
-			count_of_connections += graph[i][j];
-	return count_of_connections;
-}
-//checks if graph is full
-enum boolean isGraphFull(int **graph, int graph_size, int count_of_connections)
-{
-	int countOfConnectionsInFullGraph = graph_size * (graph_size - 1);
-	if (count_of_connections == countOfConnectionsInFullGraph) return true;
-	else return false;
-}
-//checks if graph is empty
-enum boolean isGraphEmpty(int **graph, int graph_size, int count_of_connections)
-{
-	int countOfConnectionsInEmptyGraph = 0;
-	if (count_of_connections == countOfConnectionsInEmptyGraph) return true;
-	else return false;
-}
 //return vertex of maximal degree
 int foundVertexOfMaximalDegree(int **graph, int graph_length)
 {
