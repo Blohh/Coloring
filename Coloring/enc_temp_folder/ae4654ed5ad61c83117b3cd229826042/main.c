@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
 enum boolean {
 	false,
 	true,
@@ -46,6 +45,7 @@ int subGraphLength(int **graph, enum boolean *visited, int vertex, int graph_len
 				visited[i] = true;
 				length = 1 + subGraphLength(graph, visited, i, graph_length);
 			}
+
 		}
 	}
 	return length;
@@ -81,7 +81,6 @@ enum boolean subGraphIsFull(int **graph, int graph_length, int vertex)
 					return false;						
 	return true;
 }
-//fills table of visited vertices with 'false' value
 void createVisitedTable(int graph_length, enum boolean *visited)
 {
 	for (int i = 0; i < graph_length; i++) visited[i] = false;
@@ -98,7 +97,8 @@ enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int gra
 }
 int main()
 {
-	int graph_length = 0, **graph;
+	int graph_length = 0,
+		**graph, count_of_tests = 17;
 		scanf("%d", &graph_length);
 		graph = malloc(sizeof(int*)*graph_length);
 		for (int i = 0; i < graph_length; i++)
