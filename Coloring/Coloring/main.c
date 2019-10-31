@@ -9,18 +9,10 @@ enum boolean {
 //fills 2-dimentional size x size table
 void fill2DimentionalTable(int **tab, int size)
 {
+	getchar(); // remove spacebar
 	for (int i = 0; i < size; i++)
 		for (int j = 0; j < size; j++)
-			scanf("%d", &tab[i][j]);
-
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = 0; j < size; j++)
-		{
-			printf("%d ", tab[i][j]);
-		}
-		printf("\n");
-	}
+			tab[i][j] = (int)getchar() - '0';
 }
 //return vertex of maximal degree
 int foundVertexOfMaximalDegree(int **graph, int graph_length)
@@ -95,18 +87,18 @@ enum boolean subGraphIsFull(int **graph, int graph_length, int vertex)
 	}
 	return true;
 }
-void createVisitedTable(int graph_size, enum boolean *visited)
+void createVisitedTable(int graph_length, enum boolean *visited)
 {
-	for (int i = 0; i < graph_size; i++) visited[i] = false;
+	for (int i = 0; i < graph_length; i++) visited[i] = false;
 }
 //checks if chromatic number is greater than maximal degree
-enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int graph_size)
+enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int graph_length)
 {
-	enum boolean *visited = malloc(sizeof(enum boolean)*graph_size);
-	createVisitedTable(graph_size, visited);
-	int vertex_of_maximal_degree = foundVertexOfMaximalDegree(graph, graph_size);
-	if (subGraphIsFull(graph, graph_size, vertex_of_maximal_degree)) return true;
-	else if (isOddCycle(graph, visited, vertex_of_maximal_degree, graph_size)) return true;
+	enum boolean *visited = malloc(sizeof(enum boolean)*graph_length);
+	createVisitedTable(graph_length, visited);
+	int vertex_of_maximal_degree = foundVertexOfMaximalDegree(graph, graph_length);
+	if (subGraphIsFull(graph, graph_length, vertex_of_maximal_degree)) return true;
+	else if (isOddCycle(graph, visited, vertex_of_maximal_degree, graph_length)) return true;
 	return false;
 }
 int main()
