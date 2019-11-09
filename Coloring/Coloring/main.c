@@ -99,6 +99,7 @@ enum boolean isChromaticNumberGreaterThanMaximalGraphDegree(int **graph, int gra
 int main()
 {
 	int graph_length = 0, **graph;
+	char text[] = "OBY TO NIE BYLO YYYYYYY";
 		scanf("%d", &graph_length);
 		graph = malloc(sizeof(int*)*graph_length);
 		for (int i = 0; i < graph_length; i++)
